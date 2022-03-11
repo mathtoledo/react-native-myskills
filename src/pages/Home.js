@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { 
     View, 
     Text, 
+    FlatList,
     StyleSheet,
 } from 'react-native'
 
@@ -23,11 +24,13 @@ export default Home = () => {
             <Input placeholder="New skill" onChangeText={setNewSkill} />
             <Button onPress={handleAddNewSkill} />
             <Text style={[ styles.title, { marginVertical: 50 } ]}>My Skills</Text>
-            {
-                mySkills.map((skill, index) => (
-                    <SkillCard key={index} skill={skill}/>
-                ))
-            }            
+            <FlatList 
+                data={mySkills} 
+                keyExtractor={(_, index) => index} 
+                renderItem={({ item: skill }) => (
+                    <SkillCard skill={skill}/>
+                )}
+            />                 
         </View>
     )
 }
