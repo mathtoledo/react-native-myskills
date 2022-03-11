@@ -4,6 +4,7 @@ import {
     Text, 
     FlatList,
     StyleSheet,
+    Platform,
 } from 'react-native'
 
 import { Button } from '../components/Button'
@@ -31,7 +32,7 @@ export default Home = () => {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container}>           
             <Text style={styles.title}>Welcome, Matheus</Text>
             <Text style={styles.greetings}>{greeting}</Text>
 
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         flex: 1, 
         backgroundColor: '#121015',
         paddingHorizontal: 30,
-        paddingVertical: 70,
+        paddingVertical: Platform.OS === 'ios' ? 70 : 20,
     },
     title: {
         color: '#FFF',
