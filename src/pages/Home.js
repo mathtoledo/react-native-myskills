@@ -13,7 +13,7 @@ import { SkillCard } from '../components/SkillCard'
 export default Home = () => {
     const [newSkill, setNewSkill] = useState('')
     const [mySkills, setMySkills] = useState([])
-    const [gretting, setGretting] = useState('')
+    const [greeting, setGreeting] = useState('')
 
     handleAddNewSkill = () => {
         setMySkills(state => [...state, newSkill])
@@ -22,18 +22,18 @@ export default Home = () => {
     useEffect(() => {
         const currentHour = new Date().getHours()
         if (currentHour < 12) {
-            setGretting('Good morning')
+            setGreeting('Good morning')
         } else if (currentHour >= 12 && currentHour < 18) {
-            setGretting('Good afternoon')
+            setGreeting('Good afternoon')
         } else {
-            setGretting('Good night')
+            setGreeting('Good night')
         }
     }, [])
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome, Matheus</Text>
-            <Text style={styles.greetings}>{gretting}</Text>
+            <Text style={styles.greetings}>{greeting}</Text>
 
             <Input placeholder="New skill" onChangeText={setNewSkill} />
             <Button onPress={handleAddNewSkill} />
