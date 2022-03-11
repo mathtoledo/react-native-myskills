@@ -1,13 +1,19 @@
 import React from 'react'
-import { TextInput, StyleSheet } from  'react-native'
+import { 
+  TextInput, 
+  TextInputProps, 
+  Platform, 
+  StyleSheet 
+} from  'react-native'
 
-const Input = ({ onChangeText, placeholder }) => {
+type InputProps = TextInputProps
+
+const Input = ({ ...rest }: InputProps ) => {
   return (
     <TextInput 
         style={styles.input} 
-        placeholder={placeholder}
         placeholderTextColor="#555" 
-        onChangeText={onChangeText}
+        {...rest}
     />
   )
 }
@@ -24,4 +30,4 @@ const styles = StyleSheet.create({
 })
 
 
-export { Input }
+export default Input

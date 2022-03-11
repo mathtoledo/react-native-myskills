@@ -7,17 +7,26 @@ import {
     Platform,
 } from 'react-native'
 
-import { Button } from '../components/Button'
-import { Input } from '../components/Input'
-import { SkillCard } from '../components/SkillCard'
+import Button from '../components/Button'
+import Input from '../components/Input'
+import SkillCard from '../components/SkillCard'
 
-export default Home = () => {
+interface Skill {
+    id: string
+    name: string
+}
+
+const Home = () => {
     const [newSkill, setNewSkill] = useState('')
-    const [mySkills, setMySkills] = useState([])
+    const [mySkills, setMySkills] = useState<Skill[]>([])
     const [greeting, setGreeting] = useState('')
 
-    handleAddNewSkill = () => {
-        setMySkills(state => [...state, newSkill])
+    const handleAddNewSkill = () => {
+        const data = {
+            id: String(new Date().getTime()),
+            name: newSkill
+        }
+        setMySkills(state => [...state, data])
     }
     
     useEffect(() => {
@@ -37,14 +46,14 @@ export default Home = () => {
             <Text style={styles.greetings}>{greeting}</Text>
 
             <Input placeholder="New skill" onChangeText={setNewSkill} />
-            <Button onPress={handleAddNewSkill} />
+            <Button title="Add" onPress={handleAddNewSkill} />
             
             <Text style={[ styles.title, { marginVertical: 50 } ]}>My Skills</Text>
             <FlatList 
                 data={mySkills} 
-                keyExtractor={(_, index) => index} 
+                keyExtractor={skill => skill.id} 
                 renderItem={({ item: skill }) => (
-                    <SkillCard skill={skill}/>
+                    <SkillCard skillName={skill.name}/>
                 )}
             />                 
         </View>
@@ -67,3 +76,5 @@ const styles = StyleSheet.create({
         color: "#FFF",
     }
 })
+
+export default Home
